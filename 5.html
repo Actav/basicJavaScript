@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+<script>
+  "use strict";
+
+  console.log(mathOperation("d", 3, "+"));
+  console.log(mathOperation(5, "d", "-"));
+  console.log(mathOperation("5", 3, "*"));
+  console.log(mathOperation(5, 3, "/"));
+  console.log(mathOperation(5, 3, ":)"));
+
+  /**
+ * Выполняет математческое действие с двумя числами в зависимости от веденного
+ * математического действия.
+ * @param {number} a Первое число.
+ * @param {number} b Второе число.
+ * @param {string} operant Знак математического действия "+", "-", "*", "/".
+ * @return {number} Результат введеного математического действия, если один
+ * из параметров не верен вернет NaN.
+ */
+  function mathOperation(a, b, operant) {
+    if (!isAN(a) || !isAN(b)) {
+      return NaN;
+    }
+
+    switch (operant) {
+      case "+":
+        return getSumm(a, b);
+      case "-":
+        return getSubtraction(a, b);
+      case "*":
+        return getMultiplication(a, b);
+      case "/":
+        return getDivision(a, b);
+      default:
+        return NaN;
+    }
+  }
+
+  /**
+ * Проверяем является переменная числом.
+ * @param n Проверяемая переменная.
+ * @return {bool} Результат проверки на число.
+ */
+  function isAN(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n)
+  }
+
+  /**
+ * Получаем сумму двух чисел.
+ * @param {number} a Первое число.
+ * @param {number} b Второе число.
+ * @return {number} Результат сложения чисел.
+ */
+  function getSumm(a, b) {
+    return a + b;
+  }
+
+  /**
+ * Получаем разность двух чисел, из большего вычитаем меньшее.
+ * @param {number} a Первое число.
+ * @param {number} b Второе число.
+ * @return {number} Результат разности чисел.
+ */
+  function getSubtraction(a, b) {
+    return a >= b ? a - b : b - a;
+  }
+
+  /**
+ * Получаем произведение двух чисел .
+ * @param {number} a Первое число.
+ * @param {number} b Второе число.
+ * @return {number} Результат умножения чисел.
+ */
+  function getMultiplication(a, b) {
+    return a * b;
+  }
+
+  /**
+ * Получаем частное двух чисел .
+ * @param {number} a Первое число.
+ * @param {number} b Второе число.
+ * @return {number} Результат деления чисел.
+ */
+  function getDivision(a, b) {
+    return a / b;
+  }
+
+</script>
+</body>
+</html>
