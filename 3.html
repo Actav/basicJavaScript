@@ -8,34 +8,30 @@
 <!--
 Обязательное задание.
 
-Необходимо попросить пользователя ввести два числа в переменные `a` и `b`.
-Необходимо вывести в консоль один результат из следующих проверок:
-1. Если оба числа в переменных `a` и `b` положительные, вывести разность
-чисел `a` и `b`, а именно, вычесть из переменной `a` значение переменной `b`.
-2. Если оба числа в переменных `a` и `b` отрицательные, вывести произведение
-чисел `a` и `b`.
-3. Если числа в переменных `a` и `b` разных знаков, вывести сумму чисел
-`a` и `b`.
-В остальных случаях программа не должна ничего выводить.
+Дан массив products, необходимо цену каждого продукта уменьшить на 15% используя
+метод forEach.
 -->
 <script>
   "use strict";
 
-  const userNumA = +prompt("Введите число A");
-  const userNumB = +prompt("Введите число B");
-  let result = NaN;
+  const products = [
+    {
+      id: 3,
+      price: 200,
+    },
+    {
+      id: 4,
+      price: 900,
+    },
+    {
+      id: 1,
+      price: 1000,
+    },
+  ];
 
-  if (userNumA >= 0 && userNumB >= 0) {
-    result = userNumA - userNumB;
-  } else if (userNumA < 0 && userNumB < 0) {
-    result = userNumA * userNumB;
-  } else {
-    result = userNumA + userNumB;
-  }
-
-  if (result !== NaN) {
-    console.log(result);
-  }
+  products.forEach((product, _) => {
+    product.price = product.price * 0.85
+  });
 </script>
 </body>
 </html>
