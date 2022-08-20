@@ -8,43 +8,150 @@
 <!--
 Обязательное задание.
 
-Необходимо из объекта, который лежит в константе post вывести значения, к
-которым приписан комментарий, в консоль.
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
 -->
 <script>
   "use strict";
 
-  const post = {
-    author: "John", // вывести этот текст
-    postId: 23,
-    comments: [
-      {
-        userId: 10,
-        userName: "Alex",
-        text: "lorem ipsum",
-        rating: {
-          likes: 10,
-          dislikes: 2, // вывести это число
-        },
-      },
-      {
-        userId: 5, // вывести это число
-        userName: "Jane",
-        text: "lorem ipsum 2", // вывести этот текст
-        rating: {
-          likes: 3,
-          dislikes: 1,
-        },
-      },
-    ],
-  };
+  function PostES5(name, text) {
+    this.name = name;
+    this.text = text;
+    this.getDate();
+  }
 
-  console.log(post.author);
+  PostES5.prototype.getDate = function () {
+      const date = new Date();
+      this.date = date.toLocaleString();
+  }
 
-  const postCommentsArr = post.comments
-  console.log(postCommentsArr[0].rating.dislikes);
-  console.log(postCommentsArr[1].userId);
-  console.log(postCommentsArr[1].text);
+  PostES5.prototype.edit = function (text) {
+    this.text = text;
+    this.getDate();
+  }
+
+  function AttachedPostES5(name, text) {
+    PostES5.call(this, name, text);
+    this.highlighted = false;
+  }
+
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+  AttachedPostES5.prototype.makeTextHighlighted = function () {
+    this.highlighted = true;
+    this.getDate();
+  }
+
+
+  let timer = 0;
+  const postES5 = new PostES5("Actav", "PostES5 lorem ipsum dolor sit amet, consectetur adipisicing elit.");
+  console.log(postES5);
+
+  const attachedPostES5 = new AttachedPostES5("Actav", "AttachedPostES5 lorem ipsum dolor sit amet, consectetur adipisicing elit.")
+  console.log(attachedPostES5);
+
+  setTimeout(() => {
+    postES5.edit("PostEditES5 Consectetur adipisicing elit.");
+    console.log(postES5);
+  }, ++timer*1E3);
+
+  setTimeout(() => {
+    attachedPostES5.edit("AttachedPostEditES5 Consectetur adipisicing elit.");
+    console.log(attachedPostES5);
+  }, ++timer*1E3);
+
+  setTimeout(() => {
+    attachedPostES5.makeTextHighlighted();
+    console.log(attachedPostES5);
+  }, ++timer*1E3);
+
+// ---------------------------------------------------------------------- //
+
+  class PostES6 {
+    constructor(name, text) {
+      this.name = name;
+      this.text = text;
+      this.getDate();
+    }
+    getDate() {
+        const date = new Date();
+        this.date = date.toLocaleString();
+    }
+    edit(text) {
+      this.text = text;
+      this.getDate();
+    }
+  }
+
+  class AttachedPostES6 extends PostES6 {
+    constructor(name, text) {
+      super(name, text);
+      this.highlighted = false;
+    }
+    makeTextHighlighted() {
+      this.highlighted = true;
+      this.getDate();
+    }
+  }
+
+  const postES6 = new PostES6("Actav", "PostES6 lorem ipsum dolor sit amet, consectetur adipisicing elit.");
+  console.log(postES6);
+
+  const attachedPostES6 = new AttachedPostES6("Actav", "AttachedPostES6 lorem ipsum dolor sit amet, consectetur adipisicing elit.")
+  console.log(attachedPostES6);
+
+  setTimeout(() => {
+    postES6.edit("PostEditES6 Consectetur adipisicing elit.");
+    console.log(postES6);
+  }, ++timer*1E3);
+  setTimeout(() => {
+
+    attachedPostES6.edit("AttachedPostEditES6 Consectetur adipisicing elit.");
+    console.log(attachedPostES6);
+  }, ++timer*1E3);
+
+  setTimeout(() => {
+    attachedPostES6.makeTextHighlighted();
+    console.log(attachedPostES6);
+  }, ++timer*1E3);
+
 </script>
 </body>
 </html>
