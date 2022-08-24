@@ -59,7 +59,7 @@
   теги будут созданы браузером.
   */
 
-  d.addEventListener("DOMContentLoaded", () => {
+  addEventListener("DOMContentLoaded", () => {
     console.log("все теги прогрузились");
   });
 
@@ -68,7 +68,7 @@
   ресурсы страницы будут загружены.
   */
 
-  d.addEventListener('load', (event) => {
+  addEventListener('load', (event) => {
     console.log('страница загрузилась');
   });
 
@@ -82,7 +82,7 @@
   Необходимо использовать делегирование.
   */
 
-  d.body.addEventListener("click", e => {
+  addEventListener("click", e => {
     const checkClass = e.target.classList.contains("super_element");
     console.log(`Класс "super_element" ${(checkClass ? "при" : "от")}сутствует в элементе "${e.target.nodeName.toLowerCase()}".`);
   })
