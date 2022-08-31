@@ -2,88 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-  <style>
-    i {
-      font-size: 50px;
-    }
-    .golden {
-      color: gold;
-    }
-  </style>
+  <title>Homework</title>
 </head>
 <body>
 <!--
-Обязательное задание.
+Необязательное задание.
 
-Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
-стирать, код с решением задачи пишем под комментарием.
+Ваша задача - создать функцию, которая может принимать любое неотрицательное
+целое число в качестве аргумента и возвращать число с теми же цифрами, но в
+порядке убывания.
+Если проще - переставьте цифры, чтобы получить максимально возможное число из
+данного набора цифр.
 -->
-
-<div class="stars_container">
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-  <i class="fas fa-star"></i>
-</div>
-
 <script>
   "use strict";
 
-  /*
-  1. При наведении на любую из звезд, данной звезде должен ставиться класс
-  golden, также такой класс должен ставиться всем звездам до нее слева.
-  */
-
-  const starsContainer = document.querySelector('.stars_container'),
-        starElms = document.querySelectorAll('.fas.fa-star');
-
-  starsContainer.addEventListener("mouseover", e => {
-    if (!e.target.classList.contains('fas')) {
-      return;
-    }
-
-    for (var starElm of starElms) {
-      starElm.classList.add("golden");
-      if (e.target === starElm) break;
-    }
-  })
-
-  /*
-  2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
-  задания должны быть удалены.
+  /**
+   * Функция перемещает цифры получая наибольшее число.
+   * @param {number} n - Число, из цифр которого нужно составить наибольшее
+   * возможное число с теми же цифрами.
+   * @returns {number} - Набольшее число из набора цифр числа, переданного в
+   * параметр "n"
    */
+  function descendingOrder(n) {
+    return +[].map.call(String(n), x => x).sort((a,b) => b - a).join('');
+  }
 
- starsContainer.addEventListener("mouseout", e => {
-   if (!e.target.classList.contains('fas')) {
-     return;
-   }
-
-   starElms.forEach(starElm => {
-     starElm.classList.remove("golden");
-   });
- });
-
-
-  /*
-  3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
-  звезды (временно могут становиться черными). Почему так? Напишите словами.
-  Можем ли мы это исправить? Если да, то предложите решение.
-
-  <i> строковый элемент, а так как у нас есть перенос строки в HTML, то он будет
-  итерпритироваться как пробел
-  */
-  // решение
-  document.querySelector('style')
-    .append(
-      document.createTextNode('.stars_container { display:flex }');
-    );
-
-
-
+  console.log(descendingOrder(42145)); // 54421
+  console.log(descendingOrder(145263)); // 654321
+  console.log(descendingOrder(1234567890)); // 987654321
 </script>
 </body>
 </html>
